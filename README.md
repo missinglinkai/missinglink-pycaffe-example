@@ -25,4 +25,4 @@ Alternatively, you can copy these credentials and set them in source files.
 
 These examples train classification models for MNIST dataset.
 
-- [mnist.py](https://github.com/missinglinkai/missinglink-keras-example/blob/master/getting-started/mnist_missinglinkai.py): training with PyCaffe's solve
+- [mnist.py](https://github.com/missinglinkai/missinglink-pycaffe-example/blob/master/getting-started/mnist_missinglinkai.py): training with PyCaffe's solve
