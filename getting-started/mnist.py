@@ -7,9 +7,9 @@
 
 import caffe
 import os
-import sys
 
 from caffe import layers as L, params as P
+from subprocess import call
 
 caffe_root = '../'  # This file should be run from {caffe_root}/examples (otherwise change this line)
 
