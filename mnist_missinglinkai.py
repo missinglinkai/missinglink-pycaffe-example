@@ -63,8 +63,11 @@ args = parser.parse_args()
 OWNER_ID = args.owner_id or OWNER_ID
 PROJECT_TOKEN = args.project_token or PROJECT_TOKEN
 
-callback = missinglink.PyCaffeCallback(owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
-callback.set_properties(display_name='MNIST', description='LeNet network')
-solver = callback.create_wrapped_solver(caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
+missinglink_callback = missinglink.PyCaffeCallback(
+    owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
+missinglink_callback.set_properties(
+    display_name='MNIST', description='LeNet network')
+solver = missinglink_callback.create_wrapped_solver(
+    caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
 
 solver.solve()

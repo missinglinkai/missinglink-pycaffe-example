@@ -64,7 +64,8 @@ args = parser.parse_args()
 OWNER_ID = args.owner_id or OWNER_ID
 PROJECT_TOKEN = args.project_token or PROJECT_TOKEN
 
-callback = missinglink.PyCaffeCallback(owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
+missinglink_callback = missinglink.PyCaffeCallback(
+    owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
 
 mnist_class_mapping = {
     0: 'zero',
@@ -79,7 +80,10 @@ mnist_class_mapping = {
     9: 'nine',
 }
 
-callback.set_properties(display_name='My MNIST', description='My LeNet network', class_mapping=mnist_class_mapping)
-solver = callback.create_wrapped_solver(caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
+missinglink_callback.set_properties(
+    display_name='My MNIST', description='Conv1 with kernel size 6',
+    class_mapping=mnist_class_mapping)
+solver = missinglink_callback.create_wrapped_solver(
+    caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
 
 solver.solve()
