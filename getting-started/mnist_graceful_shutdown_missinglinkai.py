@@ -63,8 +63,12 @@ args = parser.parse_args()
 OWNER_ID = args.owner_id or OWNER_ID
 PROJECT_TOKEN = args.project_token or PROJECT_TOKEN
 
+def stopped_callback():
+    print('Experiment stopped from the web')
+
 missinglink_callback = missinglink.PyCaffeCallback(
-    owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
+    owner_id=OWNER_ID, project_token=PROJECT_TOKEN,
+    stopped_callback=stopped_callback)
 missinglink_callback.set_properties(
     display_name='MNIST', description='LeNet network')
 solver = missinglink_callback.create_wrapped_solver(
