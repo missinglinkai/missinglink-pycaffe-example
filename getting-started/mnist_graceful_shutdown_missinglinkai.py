@@ -63,8 +63,18 @@ args = parser.parse_args()
 OWNER_ID = args.owner_id or OWNER_ID
 PROJECT_TOKEN = args.project_token or PROJECT_TOKEN
 
+def start_new_experiment():
+    # Write code here that starts a new experiment
+    pass
+
+def log_experiment_to_internal_log():
+    # Write code here that logs important information
+    # to your internal logs
+    pass
+
 def stopped_callback():
-    print('Experiment stopped from the web')
+    start_new_experiment()
+    log_experiment_to_internal_log()
 
 missinglink_callback = missinglink.PyCaffeCallback(
     owner_id=OWNER_ID, project_token=PROJECT_TOKEN,
