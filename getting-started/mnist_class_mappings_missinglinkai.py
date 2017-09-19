@@ -81,7 +81,7 @@ mnist_class_mapping = {
 
 missinglink_callback.set_properties(
     display_name='MNIST', description='LeNet network',
-    class_mapping=class_mapping)
+    class_mapping=mnist_class_mapping)
 
 solver = missinglink_callback.create_wrapped_solver(
     caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
