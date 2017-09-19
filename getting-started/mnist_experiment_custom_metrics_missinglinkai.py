@@ -73,15 +73,14 @@ solver = missinglink_callback.create_wrapped_solver(
 from datetime import datetime
 
 time_before_experiment = datetime.utcnow()
-kwh_cost = 0.25  # A very expensive electrical rate in USD
-gpu_wattage_kW = 16  # 64 typical modern single GPU unit each ~ 0.25 kW
+no_teraflops = 128  # 64 typical modern single GPU unit each ~ 2 teraflops/s
 
-def cost_of_running_experiment():
-    time_elapsed_hours = \
-        (datetime.utcnow() - time_before_experiment).total_seconds() / 3600
-    return gpu_wattage_kW * time_elapsed_hours * kwh_cost
+def total_gpu_teraflops():
+    time_elapsed_seconds = \
+        datetime.utcnow() - time_before_experiment).total_seconds()
+    return K.variable(no_teraflops * time_elapsed_hours)
 
 missinglink_callback.set_monitored_blobs(
-    ['loss', cost_of_running_experiment])
+    ['loss', total_gpu_teraflops])
 
 solver.solve()
