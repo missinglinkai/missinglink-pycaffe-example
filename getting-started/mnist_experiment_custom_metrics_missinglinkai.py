@@ -70,17 +70,14 @@ missinglink_callback.set_properties(
 solver = missinglink_callback.create_wrapped_solver(
     caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
 
-from datetime import datetime
-
-time_before_experiment = datetime.utcnow()
-no_teraflops = 128  # 64 typical modern single GPU unit each ~ 2 teraflops/s
-
-def total_gpu_teraflops():
-    time_elapsed_seconds = \
-        datetime.utcnow() - time_before_experiment).total_seconds()
-    return K.variable(no_teraflops * time_elapsed_hours)
+def sorensen_dice():
+    # Here we can modify this function to
+    # calculate the sorensen dice coefficient
+    # or any other custom metrics
+    # instead of returning 1
+    return 1
 
 missinglink_callback.set_monitored_blobs(
-    ['loss', total_gpu_teraflops])
+    ['loss', sorensen_dice])
 
 solver.solve()

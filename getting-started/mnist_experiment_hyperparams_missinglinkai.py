@@ -50,8 +50,8 @@ with open('mnist/lenet_auto_train.prototxt', 'w') as f:
 with open('mnist/lenet_auto_test.prototxt', 'w') as f:
     f.write(str(lenet('mnist/mnist_test_lmdb', 100)))
 
-# caffe.set_mode_cpu()  # Or use gpu by running the next line instead if your machine has access to a GPU
-caffe.set_mode_gpu()  # Switch back to CPU if you only have access to a CPU
+caffe.set_mode_cpu()  # Or use gpu by running the next line instead if your machine has access to a GPU
+# caffe.set_mode_gpu()
 
 # Provide an alternative to provide MissingLinkAI credential
 parser = argparse.ArgumentParser()
@@ -65,10 +65,13 @@ PROJECT_TOKEN = args.project_token or PROJECT_TOKEN
 
 missinglink_callback = missinglink.PyCaffeCallback(
     owner_id=OWNER_ID, project_token=PROJECT_TOKEN)
+
+DROPOUT_RATE = 0.1
+
 missinglink_callback.set_properties(
     display_name='MNIST', description='LeNet network')
 missinglink_callback.set_hyperparams(
-    is_cpu=False)
+    dropout_rate=DROPOUT_RATE)
 solver = missinglink_callback.create_wrapped_solver(
     caffe.SGDSolver, 'mnist/lenet_auto_solver.prototxt')
 
